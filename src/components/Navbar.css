@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid grey;
-    padding: 2rem 5rem;
+    padding: 2rem 4rem;
 }
 
 .nav-logo {
@@ -41,6 +41,8 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    flex-grow: 1;
+    justify-content: center;
 }
 
 .nav-links li {
@@ -174,7 +176,6 @@
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
-    margin-left: 5rem;
 }
 
 .menu-icon {
