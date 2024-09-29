@@ -82,7 +82,7 @@ const Homepage = () => {
                         <img className='image' src='https://images.pexels.com/photos/21926655/pexels-photo-21926655/free-photo-of-bottle-of-coco-noir-perfume.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
                         <h1>Fragrance</h1>
                     </div>
-                    <p className='reveal'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit officiis necessitatibus explicabo facilis odit accusamus nobis ullam cumque ab. Aut nulla architecto quam corrupti voluptate nam nihil suscipit eaque soluta.</p>
+                    <p className='reveal'>Experience <b>perfumes</b> that transform your essence and leave a lasting impression, curated for those who appreciate the <b>finer things in life</b>.</p>
                 </div>
             </div>
             <img 
