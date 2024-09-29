@@ -12,7 +12,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const currentPath = window.location.pathname;
-  
+
   return (
     <Router>
       <Navbar

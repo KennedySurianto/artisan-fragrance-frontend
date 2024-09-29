@@ -1,0 +1,87 @@
+:root {
+    --dark-brown: #D4A96B;
+}
+
+.container {
+    margin: 7.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.sub-heading h1 {
+    font-size: 5rem;
+    color: var(--dark-brown);
+    letter-spacing: 0.4rem;
+}
+
+.sub-heading {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.sub-heading > * {
+    margin: 0 1rem;
+}
+
+.image {
+    width: 9rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 10rem;
+}
+
+.big-image {
+    object-fit: cover;
+    width: 15rem;
+    height: 35rem;
+    flex-grow: 3;
+    border: 2px solid var(--dark-brown);
+}
+
+.heading p {
+    margin: 0 1rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    width: 24rem;
+    text-wrap: balance;
+    padding-left: 1rem;
+    border-left: 2px solid var(--dark-brown);
+}
+
+.reveal {
+    color: transparent;
+    --g: no-repeat linear-gradient(#D4A96B 0 0) 0 100%;
+    background: var(--g), white;
+    background-size: 100% 100%;
+    -webkit-background-clip: padding-box, text;
+    background-clip: padding-box, text;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    animation: t 2s both cubic-bezier(0.5, 0, 0.2, 1);
+}
+
+@keyframes t {
+    to {
+        background-size: 0% 100%;
+    }
+}
+
+.revealUp {
+    opacity: 0;
+    visibility: hidden;
+}
