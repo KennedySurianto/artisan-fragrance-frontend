@@ -11,20 +11,49 @@ const Homepage = () => {
     const imageRef = useRef(null);
 
     useEffect(() => {
-        gsap.fromTo(
-            imageRef.current,
-            { x: -300, autoAlpha: 0 }, // Start 200px to the right and invisible
-            { x: 0, autoAlpha: 1, duration: 1.2, ease: "power2.out" } // Animate to the left and fade in
-        );
+        ScrollTrigger.create({
+            trigger: imageRef.current,
+            start: "top 90%",
+            end: "bottom 10%",
+            markers: false,
+            onEnter: () => {
+                gsap.fromTo(
+                    imageRef.current, 
+                    { x: -300, autoAlpha: 0 },
+                    { x: 0, autoAlpha: 1, duration: 1.2, ease: "power2.out" }
+                )
+            },
+            onLeave: () => {
+                gsap.fromTo(
+                imageRef.current,
+                { autoAlpha: 1 },
+                { autoAlpha: 0, overwrite: "auto" }
+                );
+            },
+            onEnterBack: () => {
+                gsap.fromTo(
+                    imageRef.current,
+                    { x: -300, autoAlpha: 0 },
+                    { x: 0, autoAlpha: 1, duration: 1.2, ease: "power2.out" }
+                );
+            },
+            onLeaveBack: () => {
+                gsap.fromTo(
+                    imageRef.current,
+                    { autoAlpha: 1 },
+                    { autoAlpha: 0, overwrite: "auto" }
+                );
+            },
+        })
     }, []);
 
     useEffect(() => {
-      // Loop over all reveal elements and create the GSAP ScrollTrigger animation
+        // Loop over all reveal elements and create the GSAP ScrollTrigger animation
         revealRef.current.forEach((elem) => {
             ScrollTrigger.create({
             trigger: elem,
-            start: "top 80%",
-            end: "bottom 20%",
+            start: "top 90%",
+            end: "bottom 10%",
             markers: false,
             onEnter: () => {
                 gsap.fromTo(
@@ -75,7 +104,7 @@ const Homepage = () => {
             <div className='heading'>
                 <div className='sub-container'>
                     <div className='sub-heading revealUp' ref={(el) => (revealRef.current[0] = el)}>
-                        <h1 >Artisan</h1>
+                        <h1>Artisan</h1>
                         <img className='image' src='https://images.pexels.com/photos/7453323/pexels-photo-7453323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
                     </div>
                     <div className='sub-heading revealUp' ref={(el) => (revealRef.current[1] = el)}>
@@ -90,6 +119,7 @@ const Homepage = () => {
                 ref={imageRef}
                 src='https://images.pexels.com/photos/7487834/pexels-photo-7487834.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' 
                 />
+            <div className='spacer'></div>
         </div>
     );
 };

@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* For Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+    width: 8px;
+    /* Set scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    /* Track background */
+    border-radius: 10px;
+    /* Rounded track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #D4A96B;
+    /* Scrollbar color */
+    border-radius: 10px;
+    /* Adds space around scrollbar */
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -8,6 +28,7 @@ body {
     font-family: "Urbanist", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    overflow-x: hidden;
 }
 
 * {
