@@ -97,6 +97,52 @@ const useSlideRightAnimation = (slideRightRefs) => {
             }   
         }, [slideRightRefs]);
     })
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
 }
 
-export { useRevealAnimation, useSlideRightAnimation };
+
+const useSlideLeftAnimation = (slideLeftRefs) => {
+    useEffect(() => {
+        slideLeftRefs.current.forEach((elem) => {
+            if (elem) {
+                ScrollTrigger.create({
+                    trigger: elem,
+                    start: "top 90%",
+                    end: "bottom 10%",
+                    markers: false,
+                    onEnter: () => {
+                        gsap.fromTo(
+                            elem, 
+                            { x: 300, autoAlpha: 0 },
+                            { x: 0, autoAlpha: 1, duration: 1.2, ease: "power2.out" }
+                        )
+                    },
+                    onLeave: () => {
+                        gsap.fromTo(
+                        elem,
+                        { autoAlpha: 1 },
+                        { autoAlpha: 0, overwrite: "auto" }
+                        );
+                    },
+                    onEnterBack: () => {
+                        gsap.fromTo(
+                            elem,
+                            { x: 300, autoAlpha: 0 },
+                            { x: 0, autoAlpha: 1, duration: 1.2, ease: "power2.out" }
+                        );
+                    },
+                    onLeaveBack: () => {
+                        gsap.fromTo(
+                            elem,
+                            { autoAlpha: 1 },
+                            { autoAlpha: 0, overwrite: "auto" }
+                        );
+                    },
+                })
+            }   
+        }, [slideLeftRefs]);
+    })
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+}
+
+export { useRevealAnimation, useSlideRightAnimation, useSlideLeftAnimation };
