@@ -1,7 +1,6 @@
 .offer-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: 60vh;
     margin: 10vw 0;
 }
 
