@@ -3,7 +3,7 @@
 }
 
 .container {
-    margin: 10vh;
+    margin: 10vw 6vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,7 +23,7 @@
 
 .sub-heading h1 {
     margin: 0;
-    width: 100%;
+    width: fit-content;
     font-size: 5.5vw;
     color: var(--dark-brown);
     letter-spacing: 0.4rem;
@@ -40,8 +40,8 @@
 }
 
 .image {
-    width: 10vw;
-    height: 4vw;
+    width: 8rem;
+    height: 4rem;
     object-fit: cover;
     border-radius: 10vw;
 }
@@ -79,11 +79,6 @@
     to {
         background-size: 0% 100%;
     }
-}
-
-.revealUp {
-    opacity: 0;
-    visibility: hidden;
 }
 
 @media (max-width: 1300px) {

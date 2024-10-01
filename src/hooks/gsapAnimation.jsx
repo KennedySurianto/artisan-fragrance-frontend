@@ -10,6 +10,8 @@ const useRevealAnimation = (revealRefs) => {
     useEffect(() => {
     revealRefs.current.forEach((elem) => {
         if (elem) {
+            gsap.set(elem, { y: 100, autoAlpha: 0 });
+
             ScrollTrigger.create({
             trigger: elem,
             start: "top 90%",
@@ -58,26 +60,25 @@ const useRevealAnimation = (revealRefs) => {
 
 const useSlideRightAnimation = (slideRightRefs) => {
     useEffect(() => {
+        // Set the initial state to autoAlpha: 0 and x: -300 before scroll animation
         slideRightRefs.current.forEach((elem) => {
             if (elem) {
+                gsap.set(elem, { x: -300, autoAlpha: 0 });
+
                 ScrollTrigger.create({
                     trigger: elem,
-                    start: "top 90%",
-                    end: "bottom 10%",
+                    start: "top 80%",
+                    end: "bottom 20%",
                     markers: false,
                     onEnter: () => {
                         gsap.fromTo(
                             elem, 
                             { x: -300, autoAlpha: 0 },
                             { x: 0, autoAlpha: 1, duration: 1.2, ease: "power2.out" }
-                        )
+                        );
                     },
                     onLeave: () => {
-                        gsap.fromTo(
-                        elem,
-                        { autoAlpha: 1 },
-                        { autoAlpha: 0, overwrite: "auto" }
-                        );
+                        gsap.to(elem, { autoAlpha: 0, overwrite: "auto" });
                     },
                     onEnterBack: () => {
                         gsap.fromTo(
@@ -87,42 +88,40 @@ const useSlideRightAnimation = (slideRightRefs) => {
                         );
                     },
                     onLeaveBack: () => {
-                        gsap.fromTo(
-                            elem,
-                            { autoAlpha: 1 },
-                            { autoAlpha: 0, overwrite: "auto" }
-                        );
+                        gsap.to(elem, { autoAlpha: 0, overwrite: "auto" });
                     },
-                })
+                });
             }   
-        }, [slideRightRefs]);
-    })
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-}
+        });
 
+        return () => {
+            // Cleanup the ScrollTriggers
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        };
+    }, [slideRightRefs]); // Dependencies array
+};
 
 const useSlideLeftAnimation = (slideLeftRefs) => {
     useEffect(() => {
+        // Set the initial state to autoAlpha: 0 and x: 300 before scroll animation
         slideLeftRefs.current.forEach((elem) => {
             if (elem) {
+                gsap.set(elem, { x: 300, autoAlpha: 0 });
+
                 ScrollTrigger.create({
                     trigger: elem,
-                    start: "top 90%",
-                    end: "bottom 10%",
+                    start: "top 80%",
+                    end: "bottom 20%",
                     markers: false,
                     onEnter: () => {
                         gsap.fromTo(
                             elem, 
                             { x: 300, autoAlpha: 0 },
                             { x: 0, autoAlpha: 1, duration: 1.2, ease: "power2.out" }
-                        )
+                        );
                     },
                     onLeave: () => {
-                        gsap.fromTo(
-                        elem,
-                        { autoAlpha: 1 },
-                        { autoAlpha: 0, overwrite: "auto" }
-                        );
+                        gsap.to(elem, { autoAlpha: 0, overwrite: "auto" });
                     },
                     onEnterBack: () => {
                         gsap.fromTo(
@@ -132,17 +131,18 @@ const useSlideLeftAnimation = (slideLeftRefs) => {
                         );
                     },
                     onLeaveBack: () => {
-                        gsap.fromTo(
-                            elem,
-                            { autoAlpha: 1 },
-                            { autoAlpha: 0, overwrite: "auto" }
-                        );
+                        gsap.to(elem, { autoAlpha: 0, overwrite: "auto" });
                     },
-                })
+                });
             }   
-        }, [slideLeftRefs]);
-    })
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-}
+        });
+
+        return () => {
+            // Cleanup the ScrollTriggers
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        };
+    }, [slideLeftRefs]); // Dependencies array
+};
+
 
 export { useRevealAnimation, useSlideRightAnimation, useSlideLeftAnimation };

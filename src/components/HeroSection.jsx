@@ -28,11 +28,11 @@ const HeroSection = () => {
         <div className='container'>
             <div className='heading'>
                 <div className='sub-container'>
-                    <div className='sub-heading revealUp' ref={addToRevealRefs}>
+                    <div className='sub-heading' ref={addToRevealRefs}>
                         <h1>Artisan</h1>
                         <img className='image' src='https://images.pexels.com/photos/7453323/pexels-photo-7453323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='perfume' />
                     </div>
-                    <div className='sub-heading revealUp' ref={addToRevealRefs}>
+                    <div className='sub-heading' ref={addToRevealRefs}>
                         <img className='image' src='https://images.pexels.com/photos/21926655/pexels-photo-21926655/free-photo-of-bottle-of-coco-noir-perfume.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='perfume' />
                         <h1>Fragrance</h1>
                     </div>
