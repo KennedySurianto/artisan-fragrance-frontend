@@ -1,9 +1,12 @@
-
-
-section {
+.offer-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--dark-brown);
     height: 60vh;
     margin: 10vw 0;
+}
+
+@media (max-width: 1400px) {
+    .offer-section {
+        grid-template-columns: 1fr;
+    }
 }
