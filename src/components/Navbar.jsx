@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import { Redirect, Route } from 'react-router-dom';
 
 const Navbar = (props) => {
-    const { homeActive, shopActive, loginActive, registerActive, profileActive } = props;
+    const { currentPath, onLogout } = props;
     const [isSearchModalOpen, setSearchModalOpen] = useState(false);
     const [isCartModalOpen, setCartModalOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,6 +36,7 @@ const Navbar = (props) => {
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
+        onLogout();
         window.location.href = '/login'; // or use react-router's history.push('/login');
     };
     
@@ -52,12 +52,12 @@ const Navbar = (props) => {
                 </div>
                 <div className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}>
                     <ul className="nav-links">
-                        <li><a className={ homeActive ? "link-active" : ""} href="/">Home</a></li>
-                        <li><a className={ shopActive ? "link-active" : ""} href="/shop">Shop</a></li>
+                        <li><a className={ currentPath === "/" && "link-active"} href="/">Home</a></li>
+                        <li><a className={ currentPath === "/shop" && "link-active"} href="/shop">Shop</a></li>
                         {isAuth() ? (
                             <>
                                 <li>
-                                    <a className={ profileActive ? "link-active" : ""} href="/profile">Profile</a>
+                                    <a className={ currentPath === "/profile" && "link-active"} href="/profile">Profile</a>
                                 </li>
                                 <li>
                                     <button onClick={handleLogout}>
@@ -67,8 +67,8 @@ const Navbar = (props) => {
                             </>    
                         ) : (
                             <>
-                                <li><a className={ loginActive ? "link-active" : ""} href="/login">Login</a></li>
-                                <li><a className={ registerActive ? "link-active" : ""} href="/register">Register</a></li>
+                                <li><a className={ currentPath === "/login" && "link-active" } href="/login">Login</a></li>
+                                <li><a className={ currentPath === "/register" && "link-active" } href="/register">Register</a></li>
                             </>
                         )}
                     </ul>

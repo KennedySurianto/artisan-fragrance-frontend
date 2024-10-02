@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./LoginRegister.css";
 
-const Login = () => {
+const Login = (props) => {
+    const { onLogin } = props;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Login = () => {
             const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
             localStorage.setItem('authToken', response.data.token);  // Storing token after login
             setMessage(response.data.message);
+            onLogin();
             navigate('/');
         } catch (error) {
             console.error('Login failed', error);

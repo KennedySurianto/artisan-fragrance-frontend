@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import "./App.css";
 
@@ -10,25 +10,42 @@ import Register from './pages/Register';
 import Navbar from "./components/Navbar";
 
 function App() {
-  const currentPath = window.location.pathname;
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    
+    // Check authentication status when the component mounts
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+    }, []);
 
-  return (
-    <Router>
-      <Navbar
-        homeActive={currentPath === "/"}
-        shopActive={currentPath === "/shop"}
-        loginActive={currentPath === "/login"}
-        registerActive={currentPath === "/register"}
-      />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        {/* Optional: If the route doesn't match, redirect to the homepage */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router>
-  );
+    const handleLogin = () => {
+        setIsAuthenticated(true);
+    };
+
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+    };
+
+    return (
+        <Router>
+        <Navbar
+            currentPath={window.location.pathname}
+            isAuthenticated={isAuthenticated}
+            onLogout={handleLogout}
+        />
+        <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/register" element={<Register />} />
+            {/* Optional: If the route doesn't match, redirect to the homepage */}
+            <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        </Router>
+    );
 }
 
 export default App;
