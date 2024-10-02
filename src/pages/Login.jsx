@@ -15,12 +15,9 @@ const Login = () => {
 
         try {
             const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-            // Assuming you store the JWT in localStorage
-            localStorage.setItem('token', response.data.token);
-
-            setMessage(response.data.message); // Show success message
-            // Redirect to Dashboard after successful login
-            navigate('/'); // Uncomment this line to enable redirection
+            localStorage.setItem('authToken', response.data.token);  // Storing token after login
+            setMessage(response.data.message);
+            navigate('/');
         } catch (error) {
             console.error('Login failed', error);
             // Set error message if login fails

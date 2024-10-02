@@ -35,7 +35,7 @@
     align-items: center;
 }
 
-.sub-heading > * {
+.sub-heading>* {
     margin: 0 1vw;
 }
 
@@ -87,12 +87,12 @@
         margin: 2vw;
     }
 
-    .container > * {
+    .container>* {
         margin: 2vw 0;
     }
 
     .sub-heading h1 {
-        font-size: 13vw;
+        font-size: 10vw;
     }
 
     .sub-container p {
@@ -107,7 +107,7 @@
 
     .big-image {
         width: 100%;
-        height: 100%;
+        height: 30rem;
+        object-fit: cover;
     }
-
 }
