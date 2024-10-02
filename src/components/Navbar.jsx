@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Navbar.css";
+import { Redirect, Route } from 'react-router-dom';
 
-const Navbar = ({ homeActive, shopActive }) => {
+const Navbar = (props) => {
+    const { homeActive, shopActive, loginActive, registerActive, profileActive } = props;
     const [isSearchModalOpen, setSearchModalOpen] = useState(false);
     const [isCartModalOpen, setCartModalOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,6 +30,16 @@ const Navbar = ({ homeActive, shopActive }) => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const isAuth = () => {
+        const token = localStorage.getItem('authToken');
+        return !!token;
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        window.location.href = '/login'; // or use react-router's history.push('/login');
+    };
+    
     return (
         <>
             <nav className="navbar">
@@ -40,10 +52,25 @@ const Navbar = ({ homeActive, shopActive }) => {
                 </div>
                 <div className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}>
                     <ul className="nav-links">
-                        <li><a className={ homeActive ? "link-active" : ""} href="">Home</a></li>
-                        <li><a className={ shopActive ? "link-active" : ""} href="">Shop</a></li>
-                        <li><a href="">Shop</a></li>
-                        <li><a href="">Shop</a></li>
+                        <li><a className={ homeActive ? "link-active" : ""} href="/">Home</a></li>
+                        <li><a className={ shopActive ? "link-active" : ""} href="/shop">Shop</a></li>
+                        {isAuth() ? (
+                            <>
+                                <li>
+                                    <a className={ profileActive ? "link-active" : ""} href="/profile">Profile</a>
+                                </li>
+                                <li>
+                                    <button onClick={handleLogout}>
+                                        Logout
+                                    </button>
+                                </li>
+                            </>    
+                        ) : (
+                            <>
+                                <li><a className={ loginActive ? "link-active" : ""} href="/login">Login</a></li>
+                                <li><a className={ registerActive ? "link-active" : ""} href="/register">Register</a></li>
+                            </>
+                        )}
                     </ul>
                     <div className="nav-extra">
                         <button onClick={toggleSearchModal}>

@@ -2,11 +2,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import "./LoginRegister.css";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [message, setMessage] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -16,33 +18,43 @@ const Login = () => {
             // Assuming you store the JWT in localStorage
             localStorage.setItem('token', response.data.token);
 
+            setMessage(response.data.message); // Show success message
             // Redirect to Dashboard after successful login
-            navigate('/dashboard');
+            navigate('/'); // Uncomment this line to enable redirection
         } catch (error) {
             console.error('Login failed', error);
+            // Set error message if login fails
+            if (error.response && error.response.data) {
+                setMessage('Login failed: ' + error.response.data.message);
+            } else {
+                setMessage('Login failed: An unexpected error occurred.');
+            }
         }
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    required
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    required
-                />
-                <button type="submit">Login</button>
-            </form>
+        <div className='auth-container'>
+            <div className='auth-box'>
+                <h1>Login</h1>
+                <form onSubmit={handleLogin}>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        required
+                    />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        required
+                    />
+                    {message && <p>{message}</p>} {/* Display the message */}
+                    <button type="submit" className='button type1'>Login</button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -8,18 +8,28 @@ const Register = () => {
         name: '',
         email: '',
         password: '',
+        passwordConfirm: '', // Add password confirmation field
     });
 
     const [message, setMessage] = useState('');
 
-    const { name, email, password } = formData;
+    // Destructuring formData for easier access
+    const { name, email, password, passwordConfirm } = formData;
 
     const handleChange = (e) => {
+        // Use setFormData to update the specific field
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate that passwords match
+        if (password !== passwordConfirm) {
+            setMessage("Passwords do not match");
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:5000/api/auth/register', formData);
             setMessage(response.data.message);
@@ -29,42 +39,46 @@ const Register = () => {
     };
 
     return (
-        <div className="register-container">
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name:</label>
+        <div className='auth-container'>
+            <div className='auth-box'>
+                <h1>Register</h1>
+                <form onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        name="name"
+                        name="name" // Add name attribute
                         value={name}
-                        onChange={handleChange}
+                        onChange={handleChange} // Use handleChange
+                        placeholder="Name"
                         required
                     />
-                </div>
-                <div>
-                    <label>Email:</label>
                     <input
                         type="email"
-                        name="email"
+                        name="email" // Add name attribute
                         value={email}
-                        onChange={handleChange}
+                        onChange={handleChange} // Use handleChange
+                        placeholder="Email"
                         required
                     />
-                </div>
-                <div>
-                    <label>Password:</label>
                     <input
                         type="password"
-                        name="password"
+                        name="password" // Add name attribute
                         value={password}
-                        onChange={handleChange}
+                        onChange={handleChange} // Use handleChange
+                        placeholder="Password"
                         required
                     />
-                </div>
-                <button type="submit">Register</button>
-            </form>
-            {message && <p>{message}</p>}
+                    <input
+                        type="password"
+                        name="passwordConfirm" // Add name attribute
+                        value={passwordConfirm}
+                        onChange={handleChange} // Use handleChange
+                        placeholder="Password Confirmation"
+                        required
+                    />
+                    {message && <p>{message}</p>} {/* Display the message */}
+                    <button type="submit" className='button type1'>Register</button>
+                </form>
+            </div>
         </div>
     );
 };
