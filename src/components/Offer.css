@@ -20,8 +20,7 @@
     height: 100%;
 }
 
-.offer-text-container p,
-h1 {
+.offer-text-container p, h1 {
     width: 20vw;
 }
 
@@ -38,8 +37,7 @@ h1 {
     position: relative;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 
-    &:before,
-    &:after {
+    &:before, &:after {
         position: absolute;
         content: '';
         border-bottom: 3px solid var(--dark-brown);
@@ -69,7 +67,7 @@ h1 {
 
 }
 
-.offer-text-container>* {
+.offer-text-container > * {
     margin: 1vw 0;
 }
 
@@ -88,9 +86,7 @@ h1 {
 }
 
 @media (max-width: 1400px) {
-
-    .offer-text-container p,
-    h1 {
+    .offer-text-container p, h1 {
         width: 40vw;
     }
 
@@ -103,7 +99,7 @@ h1 {
     }
 
     .offer-img-container {
-        width: 100%;
-        height: 10rem;
+        width: 600px;
+        height: 400px;
     }
 }
