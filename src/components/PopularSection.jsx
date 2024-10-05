@@ -43,12 +43,13 @@ const PopularSection = () => {
             <div className="card-container">
                 {fragrances.map(fragrance => (
                     <ProductCard 
+                    key={fragrance._id}
                     imgUrl="https://i0.wp.com/www.lascento.co.za/wp-content/uploads/2023/07/o.Oj4DOpfF3VH.jpg?fit=1440%2C1440&ssl=1" 
                     name={fragrance.name}
                     price={fragrance.price}/>
                 ))}
             </div>
-            <a href="">View All</a>
+            <a href="/shop">View All</a>
         </section>
     )
 }
