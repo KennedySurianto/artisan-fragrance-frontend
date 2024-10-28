@@ -1,7 +1,8 @@
 // src/Register.js
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
+
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -10,8 +11,8 @@ const Register = () => {
         password: '',
         passwordConfirm: '', // Add password confirmation field
     });
-
     const [message, setMessage] = useState('');
+    const navigate = useNavigate(); // Initialize navigate
 
     // Destructuring formData for easier access
     const { name, email, password, passwordConfirm } = formData;
@@ -31,8 +32,8 @@ const Register = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/register', formData);
-            setMessage(response.data.message);
+            const registerResponse = await axios.post('http://localhost:5000/api/auth/register', formData);
+            setMessage(registerResponse.data.message);
         } catch (error) {
             setMessage('Registration failed: ' + error.response.data.message);
         }

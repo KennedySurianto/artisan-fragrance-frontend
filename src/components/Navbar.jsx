@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { jwtDecode } from 'jwt-decode';
 import "./Navbar.css";
 
 const Navbar = (props) => {
@@ -6,6 +7,7 @@ const Navbar = (props) => {
     const [isSearchModalOpen, setSearchModalOpen] = useState(false);
     const [isCartModalOpen, setCartModalOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [userRole, setUserRole] = useState(null);
 
     // Function to open/close search modal
     const toggleSearchModal = () => {
@@ -34,6 +36,19 @@ const Navbar = (props) => {
         return !!token;
     }
 
+    const isAdmin = () => {
+        return userRole === 'admin';
+    }
+
+    useEffect(() => {
+        // Fetch or decode the user role, e.g., from a token or API
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decoded = jwtDecode(token); // Assuming jwtDecode() is available
+            setUserRole(decoded.role);
+        }
+    }, []);
+
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         onLogout();
@@ -54,23 +69,34 @@ const Navbar = (props) => {
                     <ul className="nav-links">
                         <li><a className={ currentPath === "/" && "link-active"} href="/">Home</a></li>
                         <li><a className={ currentPath === "/shop" && "link-active"} href="/shop">Shop</a></li>
-                        {isAuth() ? (
+                    {isAuth() ? (
+                        isAdmin() ? (
+                            <>
+                                {/* Render admin-specific content here */}
+                            </>
+                        ) : (
                             <>
                                 <li>
-                                    <a className={ currentPath === "/profile" && "link-active"} href="/profile">Profile</a>
+                                    <a className={currentPath === "/profile" ? "link-active" : ""} href="/profile">Profile</a>
                                 </li>
                                 <li>
                                     <button onClick={handleLogout}>
                                         Logout
                                     </button>
                                 </li>
-                            </>    
-                        ) : (
-                            <>
-                                <li><a className={ currentPath === "/login" && "link-active" } href="/login">Login</a></li>
-                                <li><a className={ currentPath === "/register" && "link-active" } href="/register">Register</a></li>
                             </>
-                        )}
+                        )
+                    ) : (
+                        <>
+                            <li>
+                                <a className={currentPath === "/login" ? "link-active" : ""} href="/login">Login</a>
+                            </li>
+                            <li>
+                                <a className={currentPath === "/register" ? "link-active" : ""} href="/register">Register</a>
+                            </li>
+                        </>
+                    )}
+
                     </ul>
                     <div className="nav-extra">
                         <button onClick={toggleSearchModal}>
